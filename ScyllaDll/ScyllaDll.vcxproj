@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -19,34 +19,37 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{710434C9-FC4B-4F1D-B318-E10ADC78499F}</ProjectGuid>
+    <ProjectGuid>{17050486-EA37-4E18-8001-C0767D7E0DC5}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Scylla</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v90</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v90</PlatformToolset>
+    <PlatformToolset>v140_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -90,21 +93,23 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)tinyxml;$(SolutionDir)diStorm\include;$(SolutionDir)WTL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DLL_SDK_EXPORT;WIN32;_DEBUG;_WINDOWS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)tinyxml;$(SolutionDir)diStorm\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)$(Platform)\$(Configuration)\diStorm.lib;$(SolutionDir)$(Platform)\$(Configuration)\tinyxml.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)$(Platform)\$(Configuration)\diStorm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalManifestDependencies>type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' </AdditionalManifestDependencies>
       <GenerateMapFile>true</GenerateMapFile>
       <MapFileName>$(TargetDir)$(TargetName).map</MapFileName>
       <EntryPointSymbol>
       </EntryPointSymbol>
+      <ModuleDefinitionFile>scylla_export_functions.def</ModuleDefinitionFile>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)WTL</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -131,27 +136,29 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DLL_SDK_EXPORT;WIN32;_WINDOWS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)tinyxml;$(SolutionDir)diStorm\include;$(SolutionDir)WTL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)tinyxml;$(SolutionDir)diStorm\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MinimalRebuild>true</MinimalRebuild>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>$(SolutionDir)$(Platform)\$(Configuration)\diStorm.lib;$(SolutionDir)$(Platform)\$(Configuration)\tinyxml.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)$(Platform)\$(Configuration)\diStorm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalManifestDependencies>type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' </AdditionalManifestDependencies>
-      <ModuleDefinitionFile>
-      </ModuleDefinitionFile>
+      <ModuleDefinitionFile>scylla_export_functions.def</ModuleDefinitionFile>
       <EntryPointSymbol>
       </EntryPointSymbol>
       <GenerateMapFile>true</GenerateMapFile>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)WTL</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -182,67 +189,38 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AboutGui.cpp" />
     <ClCompile Include="ApiReader.cpp" />
     <ClCompile Include="Architecture.cpp" />
     <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="ConfigurationHolder.cpp" />
     <ClCompile Include="DeviceNameResolver.cpp" />
-    <ClCompile Include="DisassemblerGui.cpp" />
-    <ClCompile Include="DllInjection.cpp" />
-    <ClCompile Include="DllInjectionPlugin.cpp" />
-    <ClCompile Include="DonateGui.cpp" />
-    <ClCompile Include="DumpMemoryGui.cpp" />
-    <ClCompile Include="DumpSectionGui.cpp" />
     <ClCompile Include="FunctionExport.cpp" />
     <ClCompile Include="IATReferenceScan.cpp" />
     <ClCompile Include="IATSearch.cpp" />
     <ClCompile Include="ImportRebuilder.cpp" />
-    <ClCompile Include="ImportsHandling.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MainGui.cpp" />
     <ClCompile Include="NativeWinApi.cpp" />
-    <ClCompile Include="OptionsGui.cpp" />
     <ClCompile Include="PeParser.cpp" />
-    <ClCompile Include="PickApiGui.cpp" />
-    <ClCompile Include="PickDllGui.cpp" />
-    <ClCompile Include="PluginLoader.cpp" />
     <ClCompile Include="ProcessAccessHelp.cpp" />
     <ClCompile Include="ProcessLister.cpp" />
     <ClCompile Include="Scylla.cpp" />
     <ClCompile Include="StringConversion.cpp" />
     <ClCompile Include="SystemInformation.cpp" />
-    <ClCompile Include="TreeImportExport.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AboutGui.h" />
     <ClInclude Include="ApiReader.h" />
     <ClInclude Include="Architecture.h" />
     <ClInclude Include="Configuration.h" />
     <ClInclude Include="ConfigurationHolder.h" />
     <ClInclude Include="DeviceNameResolver.h" />
-    <ClInclude Include="DisassemblerGui.h" />
-    <ClInclude Include="DllInjection.h" />
-    <ClInclude Include="DllInjectionPlugin.h" />
-    <ClInclude Include="DonateGui.h" />
-    <ClInclude Include="DumpMemoryGui.h" />
-    <ClInclude Include="DumpSectionGui.h" />
     <ClInclude Include="FunctionExport.h" />
-    <ClInclude Include="hexedit.h" />
     <ClInclude Include="IATReferenceScan.h" />
     <ClInclude Include="IATSearch.h" />
     <ClInclude Include="ImportRebuilder.h" />
-    <ClInclude Include="ImportsHandling.h" />
     <ClInclude Include="Logger.h" />
-    <ClInclude Include="MainGui.h" />
-    <ClInclude Include="multitree.h" />
     <ClInclude Include="NativeWinApi.h" />
-    <ClInclude Include="OptionsGui.h" />
     <ClInclude Include="PeParser.h" />
-    <ClInclude Include="PickApiGui.h" />
-    <ClInclude Include="PickDllGui.h" />
-    <ClInclude Include="PluginLoader.h" />
     <ClInclude Include="ProcessAccessHelp.h" />
     <ClInclude Include="ProcessLister.h" />
     <ClInclude Include="resource.h" />
@@ -250,16 +228,12 @@
     <ClInclude Include="StringConversion.h" />
     <ClInclude Include="SystemInformation.h" />
     <ClInclude Include="Thunks.h" />
-    <ClInclude Include="TreeImportExport.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MainGui.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="check.ico" />
-    <None Include="error.ico" />
     <None Include="scylla.ico" />
-    <None Include="warning.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
