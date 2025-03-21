@@ -76,7 +76,7 @@ HANDLE ProcessAccessHelp::NativeOpenProcess(DWORD dwDesiredAccess, DWORD dwProce
 	NTSTATUS ntStatus = 0;
 
 	InitializeObjectAttributes(&ObjectAttributes, 0, 0, 0, 0);
-	cid.UniqueProcess = (HANDLE)dwProcessId;
+	cid.UniqueProcess = UlongToHandle(dwProcessId);
 
 	ntStatus = NativeWinApi::NtOpenProcess(&hProcess,dwDesiredAccess,&ObjectAttributes, &cid);
 
@@ -143,7 +143,7 @@ bool ProcessAccessHelp::readMemoryPartlyFromProcess(DWORD_PTR address, SIZE_T si
 				bytesToRead = size - readBytes;
 			}
 
-			if (memBasic.State == MEM_COMMIT)
+			if (memBasic.State == MEM_COMMIT && memBasic.Protect != PAGE_NOACCESS)
 			{
 				if (!readMemoryFromProcess(addressPart, bytesToRead, (LPVOID)((DWORD_PTR)dataBuffer + readBytes)))
 				{
