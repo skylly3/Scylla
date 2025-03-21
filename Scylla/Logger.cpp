@@ -23,7 +23,7 @@ void Logger::log(const WCHAR * format, ...)
 	write(buf);
 }
 
-void Logger::log(const char * format, ...)
+void Logger::log(const CHAR * format, ...)
 {
 	static char buf[300];
 

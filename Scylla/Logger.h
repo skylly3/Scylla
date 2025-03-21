@@ -34,7 +34,7 @@ class ListboxLog : public Logger
 public:
 
 	ListboxLog() : window(0) { }
-	ListboxLog(HWND window);
+	ListboxLog(HWND window) { setWindow(window); }
 
 	void setWindow(HWND window);
 
