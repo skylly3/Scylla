@@ -12,8 +12,10 @@ enum OPERATING_SYSTEM {
 	WIN_7_64,
 	WIN_8_32,
 	WIN_8_64,
-	WIN_10_32,
+	WIN_8_1_32,
+	WIN_8_1_64,
 	WIN_10_64,
+	WIN_10_32,
 	WIN_11
 };
 
